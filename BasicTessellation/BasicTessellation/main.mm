@@ -1,7 +1,6 @@
 #import <Cocoa/Cocoa.h>
 #import <QuartzCore/QuartzCore.h>
 #import <Metal/Metal.h>
-#import <objc/runtime.h>
 #import <vector>
 
 class MetalTessellationLayer {
