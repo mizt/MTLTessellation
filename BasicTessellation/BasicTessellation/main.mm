@@ -25,10 +25,10 @@ class MetalTessellationLayer {
         id<MTLBuffer> _tessellationFactorsBuffer;
         id<MTLBuffer> _controlPointsBufferQuad;
     
-        BOOL _wireframe = YES;
+        BOOL _wireframe = NO;
         MTLPatchType _patchType = MTLPatchTypeQuad;
-        float _edgeFactor = 16.0;
-        float _insideFactor = 16.0;
+        float _edgeFactor = 20.0;
+        float _insideFactor = 20.0;
         
         bool _isInit = false;
             
@@ -218,10 +218,10 @@ class MetalTessellationLayer {
             controlPointsBufferOptions = MTLResourceStorageModeManaged;
             
             static const float controlPointPositionsQuad[] = {
-                -0.8,  0.8, 0.0, 1.0,   // upper-left
-                 0.8,  0.8, 0.0, 1.0,   // upper-right
-                 0.8, -0.8, 0.0, 1.0,   // lower-right
-                -0.8, -0.8, 0.0, 1.0,   // lower-left
+                -1.0,  1.0, 0.0, 1.0,   // upper-left
+                 1.0,  1.0, 0.0, 1.0,   // upper-right
+                 1.0, -1.0, 0.0, 1.0,   // lower-right
+                -1.0, -1.0, 0.0, 1.0,   // lower-left
             };
             this->_controlPointsBufferQuad = [this->_device newBufferWithBytes:controlPointPositionsQuad length:sizeof(controlPointPositionsQuad) options:controlPointsBufferOptions];
             this->_controlPointsBufferQuad.label = @"Control Points Quad";
@@ -322,7 +322,7 @@ class App {
                     dispatch_once(&oncePredicate,^{
                         dispatch_async(dispatch_get_main_queue(),^{
                             CGRect screen = [[NSScreen mainScreen] frame];
-                            NSRect rect = [this->_win contentRectForFrameRect:this->_win.frame];
+                            NSRect rect = this->_win.frame;
                             CGRect center = CGRectMake(
                                 (screen.size.width-rect.size.width)*.5,
                                 (screen.size.height-(rect.size.height))*.5,
