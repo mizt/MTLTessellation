@@ -26,7 +26,6 @@ class MetalTessellationLayer {
         id<MTLBuffer> _controlPointsBufferQuad;
     
         BOOL _wireframe = NO;
-        MTLPatchType _patchType = MTLPatchTypeQuad;
         float _edgeFactor = 20.0;
         float _insideFactor = 20.0;
         
